@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startPoint = GameObject.Find("StartPoint").transform;
+        startPoint = GameObject.Find("PlayerStartPoint").transform;
         GameObject[] tmp = GameObject.FindGameObjectsWithTag("Conso");
 
         for(int i = 0; i < tmp.Length; i++)

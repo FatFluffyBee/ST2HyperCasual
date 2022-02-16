@@ -125,8 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9c6adf8ff3543c4f9dda0936122dc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivotPoint: {fileID: 8930453629361714147}
-  topArrowPoint: {fileID: 8930453629652830541}
+  arrow: {fileID: 8930453630159676689}
+  pivotArrow: {fileID: 8930453629361714146}
   slowMoCurve:
     serializedVersion: 2
     m_Curve:
@@ -188,6 +188,8 @@ MonoBehaviour:
   timeToReachMinSpeed: 5
   maxSpeed: 25
   forceRotation: 240
+  maxDistanceForDrag: 50
+  maxArrowScale: 2.5
 --- !u!96 &8930453629793480381
 TrailRenderer:
   serializedVersion: 2
