@@ -9,7 +9,7 @@ public class PlayerInput : MonoBehaviour
     public AnimationCurve slowMoCurve, ballSpeedCurve;
     public Gradient gradient;
     public float timeToSlowMo, timeToReachMinSpeed;
-    public float maxSpeed, minSpeed, forceRotation;
+    public float maxSpeed, minSpeed, speedPercentLost = 0.95f, forceRotation;
     public float maxDragScreen, maxArrowScale;
 
     private float timeToSlowMoCount, timeToReachMinSpeedCount, maxDistanceForDrag;
@@ -52,6 +52,7 @@ public class PlayerInput : MonoBehaviour
                 startPoint.enabled = true;
                 endPoint.enabled = true;
                 arrowRd.enabled = true;
+
                 Vector3 positionStartPoint = Input.GetTouch(0).position;
                 startPoint.transform.position = positionStartPoint;
             }
@@ -65,7 +66,8 @@ public class PlayerInput : MonoBehaviour
                 else { endPoint.transform.position = tmp;}
 
                 Vector3 arrowScale = Vector3.one;
-                arrowScale.y = Vector3.Distance(endPoint.transform.position, startPoint.transform.position) / maxDistanceForDrag * (maxArrowScale - minArrowScale) + minArrowScale;
+                arrowScale.y = Vector3.Distance(endPoint.transform.position, startPoint.transform.position) / maxDistanceForDrag * (maxArrowScale - minArrowScale)
+                    + ((Vector3.Distance(endPoint.transform.position, startPoint.transform.position)==0)? 0 : minArrowScale);
                 arrow.transform.localScale = arrowScale;
                 arrowRd.color = gradient.Evaluate((arrowScale.y - minArrowScale) / (maxArrowScale - minArrowScale));
 
@@ -105,8 +107,6 @@ public class PlayerInput : MonoBehaviour
                 StopSlowMo();
             }
         }
-
-        //ConstantSpeed();
     }
 
     private void DoSlowMo()
@@ -125,24 +125,6 @@ public class PlayerInput : MonoBehaviour
         Time.fixedDeltaTime = 0.02f;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        /*if (Time.time > timeCount)
-        {
-            Vector3 currentVelocity = rB.velocity.normalized;
-            currentVelocity.y = 0;
-
-            Vector3 normal = collision.contacts[0].normal;
-            currentVelocity.y = 0;
-
-            currentVelocity = Vector3.Reflect(currentVelocity, normal.normalized);
-
-            rB.velocity = rB.velocity.magnitude * currentVelocity;
-
-          timeCount = Time.time + 0.05f;
-        */
-    }
-
     /*private void ConstantSpeed()
     {
         timeToReachMinSpeedCount += Time.deltaTime;
@@ -151,4 +133,18 @@ public class PlayerInput : MonoBehaviour
 
         rB.velocity = direction * releaseSpeed * ballSpeedCurve.Evaluate(timeToReachMinSpeedCount/timeToReachMinSpeed);
     }*/
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Ok");
+        if (rB.velocity.magnitude > minSpeed)
+        {
+            rB.velocity *= speedPercentLost;
+
+            if (rB.velocity.magnitude < minSpeed)
+            {
+                rB.velocity = rB.velocity.normalized * minSpeed;
+            }
+        }
+    }
 }

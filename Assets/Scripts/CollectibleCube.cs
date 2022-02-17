@@ -5,7 +5,7 @@ using UnityEngine;
 public class CollectibleCube : MonoBehaviour
 {
     public enum statesCollectibleCube {Active, Deactive, MiddlePoint}
-    public statesCollectibleCube state = statesCollectibleCube.Deactive;
+    public statesCollectibleCube state = statesCollectibleCube.Active;
 
     public Material colorActive, colorDeactivate;
     public AnimationCurve curveActive, curveDeactivate, curveMiddlePoint;
@@ -23,13 +23,13 @@ public class CollectibleCube : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (state == statesCollectibleCube.Deactive)
+        /*if (state == statesCollectibleCube.Deactive)
         {
             if (timerCount > timer) { timerCount = 0; }
 
             mR.material.Lerp(colorDeactivate, colorActive, curveDeactivate.Evaluate(timerCount/timer));
             timerCount += Time.deltaTime;
-        }
+        }*/
 
         if (state == statesCollectibleCube.Active)
         {
@@ -45,8 +45,11 @@ public class CollectibleCube : MonoBehaviour
     {
         if (collision.collider.tag == "Player")
         {
-            state = statesCollectibleCube.Active;
-            timerCount = 0;
+            /*state = statesCollectibleCube.Active;
+            timerCount = 0;*/
+
+            GameManager.instance.AddCollectible();
+            Destroy(gameObject);
         }
     }
 
