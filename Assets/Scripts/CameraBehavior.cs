@@ -10,7 +10,7 @@ public class CameraBehavior : MonoBehaviour
 
     public bool recentering = false;
 
-    void Update()
+    void LateUpdate()
     {
         if (ballPlayer == null)
             ballPlayer = GameObject.FindGameObjectWithTag("Player").transform;

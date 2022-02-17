@@ -9,18 +9,17 @@ public class GameManager : MonoBehaviour
 
     public void Awake()
     {
-        instance = this;
+        instance = this;  
     }
 
     public GameObject playerBall;
     private Transform startPoint;
     private List<CollectibleCube> consoHUD = new List<CollectibleCube>();
+    public PlayerInput playerCurrentBall;
 
     public RectTransform collectiblePivot;
     private Text collectibleText;
     private float collectibleCount = 0;
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -34,17 +33,15 @@ public class GameManager : MonoBehaviour
             consoHUD.Add(tmp[i].GetComponent<CollectibleCube>());
         }
 
-        collectiblePivot.localPosition = new Vector3(Screen.width/5f - Screen.width /2, Screen.height/15f - Screen.height/2, 0f);
         collectibleText.text = "0";
 
-        Debug.Log(Screen.width + " " + Screen.height);
         SpawnPlayer();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void KillPlayer()
@@ -59,7 +56,8 @@ public class GameManager : MonoBehaviour
 
     public void SpawnPlayer()
     {
-        Instantiate(playerBall, startPoint.position, Quaternion.identity);
+        GameObject instance = Instantiate(playerBall, startPoint.position, Quaternion.identity);
+        playerCurrentBall = instance.GetComponent<PlayerInput>();
     }
 
     public void ResetConso()

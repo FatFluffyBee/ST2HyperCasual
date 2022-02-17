@@ -17,6 +17,7 @@ public class PlayerInput : MonoBehaviour
     private Image startPoint, endPoint;
     private float releaseSpeed, minArrowScale;
     private SpriteRenderer arrowRd;
+    private Vector3 oldPos;
 
     // Start is called before the first frame update
     void Start()
@@ -109,6 +110,11 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        oldPos = transform.position;
+    }
+
     private void DoSlowMo()
     {
         float newTime = slowMoCurve.Evaluate(timeToSlowMoCount / timeToSlowMo);
@@ -125,19 +131,26 @@ public class PlayerInput : MonoBehaviour
         Time.fixedDeltaTime = 0.02f;
     }
 
-    /*private void ConstantSpeed()
-    {
-        timeToReachMinSpeedCount += Time.deltaTime;
-
-        Vector3 direction = rB.velocity.normalized;
-
-        rB.velocity = direction * releaseSpeed * ballSpeedCurve.Evaluate(timeToReachMinSpeedCount/timeToReachMinSpeed);
-    }*/
-
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Ok");
-        if (rB.velocity.magnitude > minSpeed)
+        if (oldPos != null)
+            transform.position = oldPos;
+
+        Vector3 direction = rB.velocity;
+        direction.y = 0f;
+
+        Vector3 normal = collision.GetContact(0).normal;
+        normal.y = 0;
+
+        Vector3 newDirection = Vector3.Reflect(direction, normal);
+        newDirection.y = 0;
+
+        rB.velocity = newDirection;
+
+        Debug.Log(newDirection.x + " " + newDirection.y + " " + newDirection.z);
+
+
+        /*if (rB.velocity.magnitude > minSpeed)
         {
             rB.velocity *= speedPercentLost;
 
@@ -145,6 +158,11 @@ public class PlayerInput : MonoBehaviour
             {
                 rB.velocity = rB.velocity.normalized * minSpeed;
             }
-        }
+        }*/
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(transform.position, transform.position + rB.velocity);
     }
 }
