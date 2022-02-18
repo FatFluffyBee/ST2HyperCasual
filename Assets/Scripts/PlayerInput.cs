@@ -133,24 +133,7 @@ public class PlayerInput : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (oldPos != null)
-            transform.position = oldPos;
-
-        Vector3 direction = rB.velocity;
-        direction.y = 0f;
-
-        Vector3 normal = collision.GetContact(0).normal;
-        normal.y = 0;
-
-        Vector3 newDirection = Vector3.Reflect(direction, normal);
-        newDirection.y = 0;
-
-        rB.velocity = newDirection;
-
-        Debug.Log(newDirection.x + " " + newDirection.y + " " + newDirection.z);
-
-
-        /*if (rB.velocity.magnitude > minSpeed)
+        if (rB.velocity.magnitude > minSpeed)
         {
             rB.velocity *= speedPercentLost;
 
@@ -158,7 +141,7 @@ public class PlayerInput : MonoBehaviour
             {
                 rB.velocity = rB.velocity.normalized * minSpeed;
             }
-        }*/
+        }
     }
 
     private void OnDrawGizmos()
