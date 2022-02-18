@@ -47,7 +47,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityMinRequired: 12
   velocityRemoved: 4
-  colCube: {fileID: 0}
+  durationFeedback: 0.5
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -2
+      outSlope: -2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  matIdle: {fileID: 2100000, guid: a9cd785e8896af54785e4810ebf1afa5, type: 2}
+  matTouch: {fileID: 2100000, guid: f25e204daca620d43922dd72157d20e8, type: 2}
+  matDestroyed: {fileID: 2100000, guid: 78e9ab8f08947ec4c8587692d0d0e199, type: 2}
 --- !u!65 &6618934112673018658
 BoxCollider:
   m_ObjectHideFlags: 0
