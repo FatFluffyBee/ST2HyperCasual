@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class BreakableBlocBehavior : MonoBehaviour
 {
-    public float velocityMinRequired, velocityRemoved;
+    public float velocityMinRequired, velocityRemoved, durationFeedback = 0.5f;
+    public AnimationCurve curve;
+    public Material matIdle, matTouch, matDestroyed;
 
+    private MeshRenderer mR;
     private BoxCollider colCube;
-    private float minSpeed;
+    private float minSpeed, timerCount;
     private Rigidbody playerRb;
 
     private void Start()
     {
         colCube = GetComponent<BoxCollider>();
+        mR = transform.GetChild(0).GetComponent<MeshRenderer>();
     }
 
     private void Update()
@@ -21,6 +25,12 @@ public class BreakableBlocBehavior : MonoBehaviour
         {
             minSpeed = GameManager.instance.playerCurrentBall.GetComponent<PlayerInput>().minSpeed;
             playerRb = GameManager.instance.playerCurrentBall.GetComponent<Rigidbody>();
+        }
+
+        if (timerCount < durationFeedback)
+        {
+            timerCount += Time.deltaTime;
+            mR.materials[1].Lerp(matTouch, matIdle, timerCount / durationFeedback);
         }
     }
 
@@ -47,6 +57,6 @@ public class BreakableBlocBehavior : MonoBehaviour
 
     private void NotEnoughSpeedFb()
     {
-
+        timerCount = 0;
     }
 }

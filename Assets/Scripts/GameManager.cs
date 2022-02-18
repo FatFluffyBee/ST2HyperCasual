@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public enum statesGame {start, tuto, end, current}
+    public statesGame stateGame = statesGame.start;
+
     public static GameManager instance;
 
     public void Awake()
@@ -14,26 +17,16 @@ public class GameManager : MonoBehaviour
 
     public GameObject playerBall;
     private Transform startPoint;
-    private List<CollectibleCube> consoHUD = new List<CollectibleCube>();
     public PlayerInput playerCurrentBall;
 
-    public RectTransform collectiblePivot;
-    private Text collectibleText;
-    private float collectibleCount = 0;
+    public float highScoreCount, currentScore;
+    public float collectibleCount = 0;
+
 
     // Start is called before the first frame update
     void Start()
     {
         startPoint = GameObject.Find("PlayerStartPoint").transform;
-        GameObject[] tmp = GameObject.FindGameObjectsWithTag("Conso");
-        collectibleText = collectiblePivot.transform.GetChild(0).GetChild(0).GetComponent<Text>();
-
-        for (int i = 0; i < tmp.Length; i++)
-        {
-            consoHUD.Add(tmp[i].GetComponent<CollectibleCube>());
-        }
-
-        collectibleText.text = "0";
 
         SpawnPlayer();
     }
@@ -41,7 +34,25 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        switch(stateGame)
+        {
+            case statesGame.start:
+                if (Input.touchCount > 0)
+                    if (Input.GetTouch(0).phase == TouchPhase.Began) stateGame = statesGame.tuto;
+                break;
 
+            case statesGame.tuto:
+
+                break;
+
+            case statesGame.current:
+                break;
+
+            case statesGame.end:
+                break;
+
+        }
+        SetCurrentScore();
     }
 
     public void KillPlayer()
@@ -50,7 +61,6 @@ public class GameManager : MonoBehaviour
         Destroy(player);
         Camera.main.GetComponent<CameraBehavior>().recentering = true;
         //feedback visuel et possible arret 0.5sec
-        ResetConso();
         SpawnPlayer();
     }
 
@@ -60,18 +70,14 @@ public class GameManager : MonoBehaviour
         playerCurrentBall = instance.GetComponent<PlayerInput>();
     }
 
-    public void ResetConso()
-    {
-        foreach (CollectibleCube e in consoHUD)
-        {
-            e.Reset();
-            //effacer sur le HUD
-        }
-    }
-
     public void AddCollectible()
     {
         collectibleCount++;
-        collectibleText.text = collectibleCount.ToString();
+    }
+
+    public void SetCurrentScore()
+    {
+        currentScore = Mathf.RoundToInt(playerCurrentBall.transform.position.z - startPoint.transform.position.z);
+        if (currentScore < 0) currentScore = 0;
     }
 }
