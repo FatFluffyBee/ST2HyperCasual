@@ -7,9 +7,8 @@ public class GestionHUD : MonoBehaviour
 {
     public Text currentScore, highScore;
     public Text collectibleText;
-    public FadeInOut arrow, drag, icon;
 
-    public FadeInOut logo;
+    public GameObject tutoHolder, logo;
 
 
     // Start is called before the first frame update
@@ -29,13 +28,12 @@ public class GestionHUD : MonoBehaviour
         switch (GameManager.instance.stateGame)
         {
             case GameManager.statesGame.start:
+                tutoHolder.SetActive(true);
                 break;
 
             case GameManager.statesGame.tuto:
-                logo.Fade(false);
-                arrow.Fade(false);
-                drag.Fade(false);
-                icon.Fade(false);
+                tutoHolder.SetActive(false);
+                logo.SetActive(false);
                 break;
 
             case GameManager.statesGame.current:
@@ -54,5 +52,6 @@ public class GestionHUD : MonoBehaviour
     public void SetCurrentScore()
     {
         currentScore.text = GameManager.instance.currentScore + "m";
+        highScore.text = GameManager.instance.highScoreCount + "m";
     }
 }

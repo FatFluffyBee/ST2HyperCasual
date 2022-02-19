@@ -15,7 +15,10 @@ public class FadeInOut : MonoBehaviour
 
     private void Start()
     {
-        image = GetComponent<Image>();
+        if (imageIn)
+            image = GetComponent<Image>();
+        else
+            text = GetComponent<Text>();
     }
 
     private void Update()

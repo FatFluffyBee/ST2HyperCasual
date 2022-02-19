@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
         instance = this;  
     }
 
-    public GameObject playerBall;
+    public GameObject playerBall, screenHighScore, screenGameOver;
     private Transform startPoint;
     public PlayerInput playerCurrentBall;
 
@@ -42,13 +42,15 @@ public class GameManager : MonoBehaviour
                 break;
 
             case statesGame.tuto:
-
+                screenGameOver.SetActive(false);
+                screenHighScore.SetActive(false);
                 break;
 
             case statesGame.current:
                 break;
 
             case statesGame.end:
+                
                 break;
 
         }
@@ -62,6 +64,13 @@ public class GameManager : MonoBehaviour
         Camera.main.GetComponent<CameraBehavior>().recentering = true;
         //feedback visuel et possible arret 0.5sec
         SpawnPlayer();
+        stateGame = statesGame.start;
+
+        if (currentScore > highScoreCount)
+            SetScreenHighScore();
+        else
+            SetScreenGameOver();
+
     }
 
     public void SpawnPlayer()
@@ -79,5 +88,18 @@ public class GameManager : MonoBehaviour
     {
         currentScore = Mathf.RoundToInt(playerCurrentBall.transform.position.z - startPoint.transform.position.z);
         if (currentScore < 0) currentScore = 0;
+    }
+
+    public void SetScreenHighScore()
+    {
+        screenHighScore.SetActive(true);
+        screenHighScore.transform.GetChild(0).GetComponent<Text>().text = currentScore.ToString() + "m";
+        highScoreCount = currentScore;
+    }
+
+    public void SetScreenGameOver()
+    {
+        screenGameOver.SetActive(true);
+        screenGameOver.transform.GetChild(0).GetComponent<Text>().text = currentScore.ToString() + "m";
     }
 }
