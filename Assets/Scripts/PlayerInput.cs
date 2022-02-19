@@ -19,6 +19,8 @@ public class PlayerInput : MonoBehaviour
     private SpriteRenderer arrowRd;
     private Vector3 oldPos;
 
+    private float timeDisableColliderCount;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,7 +43,12 @@ public class PlayerInput : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
+        if (timeDisableColliderCount > Time.time)
+        {
+            GetComponent<Collider>().isTrigger = true;
+        }
+        else
+            GetComponent<Collider>().isTrigger = false;
     }
 
     void Update()
@@ -133,6 +140,8 @@ public class PlayerInput : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        timeDisableColliderCount = Time.time + 0.05f;
+
         if (rB.velocity.magnitude > minSpeed)
         {
             rB.velocity *= speedPercentLost;

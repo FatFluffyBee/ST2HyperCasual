@@ -14,7 +14,7 @@ public class BumperBehavior : MonoBehaviour
 
     private void Start()
     {
-        mR = GetComponent<MeshRenderer>();
+        mR = transform.GetChild(0).GetComponent<MeshRenderer>();
 
         durationFeedbackCount = durationFeedback;
     }
@@ -24,9 +24,8 @@ public class BumperBehavior : MonoBehaviour
         if (durationFeedbackCount < durationFeedback)
         {
             float tmp = (durationFeedbackCount / (durationFeedback / numberBleep))%1;
-            Debug.Log(tmp);
 
-            mR.material.Lerp(matOn, matOff, curve.Evaluate(tmp));
+            mR.materials[1].Lerp(matOn, matOff, curve.Evaluate(tmp));
             durationFeedbackCount += Time.deltaTime;
         }
     }

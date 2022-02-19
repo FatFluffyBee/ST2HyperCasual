@@ -10,6 +10,13 @@ public class CameraBehavior : MonoBehaviour
 
     public bool recentering = false;
 
+    private float zInitialPos;
+
+    private void Start()
+    {
+        zInitialPos = transform.position.z;
+    }
+
     void LateUpdate()
     {
         if (ballPlayer == null)
@@ -48,7 +55,7 @@ public class CameraBehavior : MonoBehaviour
 
     public void RecenterCamera()
     {
-        float zMovement = Mathf.Lerp(transform.position.z, ballPlayer.position.z, (1 / timeToReachMyBall * 2) * Time.deltaTime * 1 / Time.timeScale);
+        float zMovement = Mathf.Lerp(transform.position.z, zInitialPos, (1 / timeToReachMyBall * 2) * Time.deltaTime * 1 / Time.timeScale);
 
         transform.position = new Vector3(transform.position.x, transform.position.y, zMovement);
     }

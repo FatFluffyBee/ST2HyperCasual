@@ -41,9 +41,9 @@ public class CollectibleCube : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collider)
     {
-        if (collision.collider.tag == "Player")
+        if (collider.tag == "Player")
         {
             /*state = statesCollectibleCube.Active;
             timerCount = 0;*/
