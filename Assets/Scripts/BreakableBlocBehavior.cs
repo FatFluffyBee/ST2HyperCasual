@@ -38,7 +38,7 @@ public class BreakableBlocBehavior : MonoBehaviour
     {
         if (collision.collider.tag == "Player")
         {
-            if (playerRb.velocity.magnitude > velocityMinRequired + minSpeed)
+            if (playerRb.velocity.magnitude > velocityRemoved + minSpeed)
             {
                 DestroyBloc();
                 playerRb.velocity -= playerRb.velocity.normalized * velocityRemoved;
