@@ -13,6 +13,9 @@
 		<relationship name="folder">
 			<destination>{349a1ecb-b7fc-461d-b6fe-86435f0610ed}</destination>
 		</relationship>
+		<relationship name="tags">
+			<destination>{d7698542-b645-4243-8428-f9b147c24d3a}</destination>
+		</relationship>
 		<relationship name="mixer">
 			<destination>{e44d1f49-15d6-4baf-ba50-08bed63a9af1}</destination>
 		</relationship>
@@ -33,6 +36,9 @@
 		</relationship>
 		<relationship name="timeline">
 			<destination>{18574d04-2f86-4d65-900d-09dac92475fa}</destination>
+		</relationship>
+		<relationship name="banks">
+			<destination>{1bf83afb-0ddd-40fd-ba26-34a1004de27a}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixer" id="{e44d1f49-15d6-4baf-ba50-08bed63a9af1}">
