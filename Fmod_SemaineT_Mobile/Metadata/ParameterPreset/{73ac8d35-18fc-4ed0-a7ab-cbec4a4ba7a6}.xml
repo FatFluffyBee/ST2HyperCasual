@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{73ac8d35-18fc-4ed0-a7ab-cbec4a4ba7a6}">
+		<property name="name">
+			<value>Bump_Combo</value>
+		</property>
+		<relationship name="folder">
+			<destination>{da5e1b9c-1582-4535-b5d1-d80abc7da168}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{e664446f-2cec-4bd4-8891-bbfe06b58695}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{e664446f-2cec-4bd4-8891-bbfe06b58695}">
+		<property name="parameterType">
+			<value>1</value>
+		</property>
+		<property name="maximum">
+			<value>3</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{a401f030-cc7e-4d67-819a-1c7341dff9bc}">
+		<property name="assetPath">
+			<value>Bl_Impact_03.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2.7310884353741498</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{facbe7a6-8fa9-4c52-90a3-02ca0df85986}</destination>
+		</relationship>
+	</object>
+</objects>

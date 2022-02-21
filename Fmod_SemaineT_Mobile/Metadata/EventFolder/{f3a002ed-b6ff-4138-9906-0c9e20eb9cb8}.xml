@@ -8,7 +8,7 @@
 			<value>Bl_Release</value>
 		</property>
 		<relationship name="folder">
-			<destination>{a0a25ed6-5594-473d-8121-609b8a8a538e}</destination>
+			<destination>{292ad5b8-13eb-4e58-975a-2d5d2b3d45e6}</destination>
 		</relationship>
 	</object>
 </objects>
