@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class PlayerInput : MonoBehaviour
 {
-    public GameObject arrow, pivotArrow;
+    public GameObject arrow, pivotArrow, particlePrefab;
     public AnimationCurve slowMoCurve, ballSpeedCurve;
     public Gradient gradient;
     public float timeToSlowMo, timeToReachMinSpeed;
-    public float maxSpeed, minSpeed, speedPercentLost = 0.95f, forceRotation;
+    public float maxSpeed, maxTotalSpeed, minSpeed, speedPercentLost = 0.95f, forceRotation;
     public float maxDragScreen, maxArrowScale;
 
     private float timeToSlowMoCount, timeToReachMinSpeedCount, maxDistanceForDrag;
@@ -120,6 +120,9 @@ public class PlayerInput : MonoBehaviour
     private void LateUpdate()
     {
         oldPos = transform.position;
+
+        if (rB.velocity.magnitude > maxTotalSpeed)
+            rB.velocity = rB.velocity.normalized * maxTotalSpeed;
     }
 
     private void DoSlowMo()
@@ -140,6 +143,9 @@ public class PlayerInput : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        GameObject instance = Instantiate(particlePrefab, collision.GetContact(0).point, Quaternion.identity);
+        instance.transform.LookAt(instance.transform.position + collision.GetContact(0).normal);
+
         timeDisableColliderCount = Time.time + 0.05f;
 
         if (rB.velocity.magnitude > minSpeed)

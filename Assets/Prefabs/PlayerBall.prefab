@@ -127,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrow: {fileID: 8930453630159676689}
   pivotArrow: {fileID: 8930453629361714146}
+  particlePrefab: {fileID: 496702698947239980, guid: b1ed94e0794b70140927d5501597ea8e, type: 3}
   slowMoCurve:
     serializedVersion: 2
     m_Curve:
@@ -216,6 +217,7 @@ MonoBehaviour:
   timeToSlowMo: 2
   timeToReachMinSpeed: 5
   maxSpeed: 25
+  maxTotalSpeed: 40
   minSpeed: 10
   speedPercentLost: 0.95
   forceRotation: 240
