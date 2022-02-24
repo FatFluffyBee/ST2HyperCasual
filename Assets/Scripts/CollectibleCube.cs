@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CollectibleCube : MonoBehaviour
 {
+    public GameObject particle;
+
     public enum statesCollectibleCube {Active, Deactive, MiddlePoint}
     public statesCollectibleCube state = statesCollectibleCube.Active;
 
@@ -49,6 +51,10 @@ public class CollectibleCube : MonoBehaviour
             timerCount = 0;*/
 
             GameManager.instance.AddCollectible();
+
+            GameObject instance = Instantiate(particle, transform.position, Quaternion.identity);
+            instance.transform.LookAt(transform.position + Vector3.up);
+
             Destroy(gameObject);
         }
     }

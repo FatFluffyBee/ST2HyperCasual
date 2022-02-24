@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40c518c7fa896424a9490bd7a0c1af3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particle: {fileID: 4136351228498292086, guid: e2d3699259db8fa41be194408fe1a340, type: 3}
   state: 1
   colorActive: {fileID: 2100000, guid: 90650e9ed54d3d94d905e03f7ae197dc, type: 2}
   colorDeactivate: {fileID: 2100000, guid: a70bcc7ab6e61a34c9e3ac0ca6ed9d7b, type: 2}

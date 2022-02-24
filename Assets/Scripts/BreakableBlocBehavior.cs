@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BreakableBlocBehavior : MonoBehaviour
 {
+    public GameObject prefabBlocSplitted;
     public float velocityMinRequired, velocityRemoved, durationFeedback = 0.5f;
     public AnimationCurve curve;
     public Material matIdle, matTouch, matDestroyed;
@@ -52,7 +53,10 @@ public class BreakableBlocBehavior : MonoBehaviour
 
     private void DestroyBloc()
     {
+        GetComponent<Collider>().isTrigger = true;
+        Instantiate(prefabBlocSplitted, transform.position, Quaternion.identity);
         Destroy(gameObject);
+
     }
 
     private void NotEnoughSpeedFb()
