@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8930453629361714147}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PivotPoint
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8930453629652830541}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TopArrowpoint
   m_TagString: Untagged
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 8930453629793480376}
   - component: {fileID: 8930453629793480381}
   - component: {fileID: 8930453629793480380}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerBall
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -354,7 +354,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8930453630159676718}
   - component: {fileID: 8930453630159676719}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -438,7 +438,7 @@ GameObject:
   - component: {fileID: 8930453630416397589}
   - component: {fileID: 8930453630416397587}
   - component: {fileID: 8930453630416397586}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Render
   m_TagString: Untagged
   m_Icon: {fileID: 0}

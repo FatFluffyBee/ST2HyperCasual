@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ca0137c837ad742a5035066225e11b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabBlocSplitted: {fileID: 2191282547908529905, guid: 426146032008d76488e072012d6f4ae4, type: 3}
+  prefabBlocSplitted: {fileID: 7428169380139797273, guid: 010096183293a1e4593f14a557afdd96, type: 3}
   velocityMinRequired: 12
   velocityRemoved: 4
   durationFeedback: 0.5
