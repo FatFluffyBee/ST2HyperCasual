@@ -5,12 +5,12 @@ using UnityEngine;
 public class CameraBehavior : MonoBehaviour
 {
     public Transform ballPlayer;
-    public float authorizedGap = 2f, timeToReachMyBall = 0.5f;
+    public float authorizedGap = 2f, timeToReachMyBall = 0.5f, waitingTimeDeath = 1f;
     public bool toggleOldCam = false;
 
     public bool recentering = false;
 
-    private float zInitialPos;
+    private float zInitialPos, waitingTimeDeathCount;
 
     private void Start()
     {
@@ -28,6 +28,7 @@ public class CameraBehavior : MonoBehaviour
 
         if (!recentering)
         {
+            waitingTimeDeathCount = 0;
             if (toggleOldCam)
             {
                 if (distance < -authorizedGap || distance > authorizedGap)
@@ -55,8 +56,12 @@ public class CameraBehavior : MonoBehaviour
 
     public void RecenterCamera()
     {
-        float zMovement = Mathf.Lerp(transform.position.z, zInitialPos, (1 / timeToReachMyBall * 2) * Time.deltaTime * 1 / Time.timeScale);
+        if (waitingTimeDeathCount > waitingTimeDeath)
+        {
+            float zMovement = Mathf.Lerp(transform.position.z, zInitialPos, (1 / timeToReachMyBall * 2) * Time.deltaTime * 1 / Time.timeScale);
 
-        transform.position = new Vector3(transform.position.x, transform.position.y, zMovement);
+            transform.position = new Vector3(transform.position.x, transform.position.y, zMovement);
+        }
+        waitingTimeDeathCount += Time.deltaTime;
     }
 }

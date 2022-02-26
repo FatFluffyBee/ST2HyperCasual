@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class DestroyAfterTime : MonoBehaviour
 {
-    public float timeBeforeDestruction;
+    public float min = 2, max = 3;
 
     void Start()
     {
-        Destroy(gameObject, timeBeforeDestruction);
+        Destroy(gameObject, Random.Range(min, max));
     }
 }

@@ -158,9 +158,4 @@ public class PlayerInput : MonoBehaviour
             }
         }
     }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(transform.position, transform.position + rB.velocity);
-    }
 }

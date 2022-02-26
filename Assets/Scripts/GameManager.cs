@@ -13,9 +13,9 @@ public class GameManager : MonoBehaviour
     public void Awake()
     {
         instance = this;  
-    }
+    }   
 
-    public GameObject playerBall, screenHighScore, screenGameOver;
+    public GameObject playerBall, fragmentedPlayerBall, screenHighScore, screenGameOver;
     private Transform startPoint;
     public PlayerInput playerCurrentBall;
 
@@ -64,7 +64,11 @@ public class GameManager : MonoBehaviour
     public void KillPlayer()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Vector3 playerPos = player.transform.position;
         Destroy(player);
+
+        Instantiate(fragmentedPlayerBall, playerPos, Quaternion.identity);
+
         Camera.main.GetComponent<CameraBehavior>().recentering = true;
         //feedback visuel et possible arret 0.5sec
         SpawnPlayer();
