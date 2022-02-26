@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Conso
   - Breakable
+  - Walls
   layers:
   - Default
   - TransparentFX

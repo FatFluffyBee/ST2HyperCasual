@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using FMODUnity;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class GameManager : MonoBehaviour
 
     public float highScoreCount, currentScore;
     public float collectibleCount = 0;
+    public bool musicIntense = false;
+
+    FMOD.Studio.EventInstance music;
 
 
     // Start is called before the first frame update
@@ -29,11 +33,20 @@ public class GameManager : MonoBehaviour
         startPoint = GameObject.Find("PlayerStartPoint").transform;
 
         SpawnPlayer();
+
+        music = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Music");
+        music.start();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!musicIntense)
+            if (Input.GetTouch(0).phase == TouchPhase.Ended)
+            {
+                music.setParameterByName("Start", 1);
+                musicIntense = true;
+            }
 
         if (playerCurrentBall == null)
             SpawnPlayer();
@@ -64,21 +77,24 @@ public class GameManager : MonoBehaviour
     public void KillPlayer()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        Vector3 playerPos = player.transform.position;
-        Destroy(player);
+        if (player != null)
+        {
+            Vector3 playerPos = player.transform.position;
+            Destroy(player);
 
-        Instantiate(fragmentedPlayerBall, playerPos, Quaternion.identity);
+            Instantiate(fragmentedPlayerBall, playerPos, Quaternion.identity);
 
-        Camera.main.GetComponent<CameraBehavior>().recentering = true;
-        //feedback visuel et possible arret 0.5sec
-        SpawnPlayer();
-        stateGame = statesGame.start;
+            Camera.main.GetComponent<CameraBehavior>().recentering = true;
+            //feedback visuel et possible arret 0.5sec
+            SpawnPlayer();
+            stateGame = statesGame.start;
 
-        if (currentScore > highScoreCount)
-            SetScreenHighScore();
-        else
-            SetScreenGameOver();
-
+            if (currentScore > highScoreCount)
+                SetScreenHighScore();
+            else
+                SetScreenGameOver();
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Ball/Bl_Death/Bl_Death");
+        }
     }
 
     public void SpawnPlayer()

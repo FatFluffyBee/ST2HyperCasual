@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3097067287738010850}
   m_Layer: 0
   m_Name: ImmovableCube
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295

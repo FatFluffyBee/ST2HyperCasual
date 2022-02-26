@@ -55,6 +55,8 @@ public class CollectibleCube : MonoBehaviour
             GameObject instance = Instantiate(particle, transform.position, Quaternion.identity);
             instance.transform.LookAt(transform.position + Vector3.up);
 
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Collectible/Collect_Get/Collect_Get");
+
             Destroy(gameObject);
         }
     }

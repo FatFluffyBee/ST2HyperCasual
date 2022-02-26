@@ -53,6 +53,7 @@ public class BreakableBlocBehavior : MonoBehaviour
 
     private void DestroyBloc()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/BreakWall/BrWl_Destroy/BrWl_Destroy");
         GetComponent<Collider>().isTrigger = true;
         Instantiate(prefabBlocSplitted, transform.position, Quaternion.identity);
         Destroy(gameObject);
@@ -61,6 +62,7 @@ public class BreakableBlocBehavior : MonoBehaviour
 
     private void NotEnoughSpeedFb()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/BreakWall/BrWl_Resist/BrWl_Resist");
         timerCount = 0;
     }
 }

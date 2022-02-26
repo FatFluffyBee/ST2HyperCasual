@@ -62,6 +62,6 @@ public class CameraBehavior : MonoBehaviour
 
             transform.position = new Vector3(transform.position.x, transform.position.y, zMovement);
         }
-        waitingTimeDeathCount += Time.deltaTime;
+        waitingTimeDeathCount += Time.deltaTime * 1/Time.timeScale;
     }
 }

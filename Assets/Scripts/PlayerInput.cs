@@ -21,6 +21,9 @@ public class PlayerInput : MonoBehaviour
 
     private float timeDisableColliderCount;
 
+    FMOD.Studio.EventInstance soundHold;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +40,8 @@ public class PlayerInput : MonoBehaviour
         endPoint.transform.localScale = Vector3.one * Screen.width / 400f * 0.6f;
 
         maxDistanceForDrag = Screen.width * maxDragScreen;
+
+        soundHold = FMODUnity.RuntimeManager.CreateInstance("event:/Ball/Bl_BulletTime/Bl_BulletTime");
     }
 
     // Update is called once per frame
@@ -63,6 +68,8 @@ public class PlayerInput : MonoBehaviour
 
                 Vector3 positionStartPoint = Input.GetTouch(0).position;
                 startPoint.transform.position = positionStartPoint;
+
+                soundHold.start();
             }
 
             if (Input.GetTouch(0).phase == TouchPhase.Stationary || Input.GetTouch(0).phase == TouchPhase.Moved)
@@ -113,6 +120,9 @@ public class PlayerInput : MonoBehaviour
                     timeToReachMinSpeedCount = 0;
                 }
                 StopSlowMo();
+
+                soundHold.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Ball/Bl_Release/Bl_Release");
             }
         }
     }
@@ -143,6 +153,8 @@ public class PlayerInput : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.collider.tag == "Walls")
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Ball/Bl_Impact/Bl_Impact");
         GameObject instance = Instantiate(particlePrefab, collision.GetContact(0).point, Quaternion.identity);
         instance.transform.LookAt(instance.transform.position + collision.GetContact(0).normal);
 

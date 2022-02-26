@@ -900,6 +900,7 @@ MonoBehaviour:
   highScoreCount: 0
   currentScore: 0
   collectibleCount: 0
+  musicIntense: 0
 --- !u!4 &218246471
 Transform:
   m_ObjectHideFlags: 0
@@ -3269,7 +3270,7 @@ MonoBehaviour:
   ballPlayer: {fileID: 0}
   authorizedGap: 2
   timeToReachMyBall: 0.3
-  waitingTimeDeath: 2
+  waitingTimeDeath: 0.5
   toggleOldCam: 0
   recentering: 0
 --- !u!114 &963194230
@@ -9008,7 +9009,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: cc2e436548ad7304491058326ccf2fed, type: 3}
     m_FontSize: 14
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
