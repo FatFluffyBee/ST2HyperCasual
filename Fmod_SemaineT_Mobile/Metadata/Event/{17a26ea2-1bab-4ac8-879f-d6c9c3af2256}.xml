@@ -29,7 +29,7 @@
 			<destination>{b75af3ee-bf82-4afc-9a0c-ee142058db6f}</destination>
 		</relationship>
 		<relationship name="markerTracks">
-			<destination>{2595be70-3eb4-4454-b594-ad36ce39b5ac}</destination>
+			<destination>{5b26804f-cebe-4238-a4f3-38ccc050f0ef}</destination>
 		</relationship>
 		<relationship name="groupTracks">
 			<destination>{097e3e19-9464-4ca2-9a9f-627ad2e3db2a}</destination>
@@ -64,7 +64,7 @@
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{b75af3ee-bf82-4afc-9a0c-ee142058db6f}" />
-	<object class="MarkerTrack" id="{2595be70-3eb4-4454-b594-ad36ce39b5ac}" />
+	<object class="MarkerTrack" id="{5b26804f-cebe-4238-a4f3-38ccc050f0ef}" />
 	<object class="GroupTrack" id="{097e3e19-9464-4ca2-9a9f-627ad2e3db2a}">
 		<relationship name="modules">
 			<destination>{652f05ee-153a-47c9-a194-af7cb221616d}</destination>
@@ -109,7 +109,7 @@
 	<object class="MixerBusPanner" id="{73a7081a-1a17-406d-bc52-ddc3697f0ad9}" />
 	<object class="SnapshotModule" id="{652f05ee-153a-47c9-a194-af7cb221616d}">
 		<property name="length">
-			<value>19</value>
+			<value>7.2000000000000002</value>
 		</property>
 		<relationship name="fadeInCurve">
 			<destination>{adc3cc09-6bc0-415a-9b73-bc0ba1d90591}</destination>
@@ -159,7 +159,7 @@
 	</object>
 	<object class="LoopRegion" id="{7ed489f4-bf34-4cb3-966a-bda296383d3e}">
 		<property name="position">
-			<value>9</value>
+			<value>1.1991156462585033</value>
 		</property>
 		<property name="length">
 			<value>5</value>
@@ -168,7 +168,7 @@
 			<destination>{e8ebe31e-fe4a-4f7e-89e1-3b7d558587fa}</destination>
 		</relationship>
 		<relationship name="markerTrack">
-			<destination>{2595be70-3eb4-4454-b594-ad36ce39b5ac}</destination>
+			<destination>{5b26804f-cebe-4238-a4f3-38ccc050f0ef}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{db91b032-0099-4dc6-b6ae-216502dafa83}">
@@ -217,7 +217,7 @@
 	</object>
 	<object class="AutomationPoint" id="{b9daf5a1-5753-4ba0-abff-dbf28b41c6e4}">
 		<property name="position">
-			<value>3.5</value>
+			<value>1</value>
 		</property>
 		<property name="value">
 			<value>100</value>
@@ -225,7 +225,7 @@
 	</object>
 	<object class="AutomationPoint" id="{9bdccbbe-1003-4cab-9591-8fb05fe6b249}">
 		<property name="position">
-			<value>15</value>
+			<value>6.2000000000000002</value>
 		</property>
 		<property name="value">
 			<value>100</value>
@@ -233,7 +233,7 @@
 	</object>
 	<object class="AutomationPoint" id="{8e80bca5-62f7-4c41-a9fd-b53daa9ab394}">
 		<property name="position">
-			<value>19</value>
+			<value>7.2000000000000002</value>
 		</property>
 		<property name="value">
 			<value>0</value>

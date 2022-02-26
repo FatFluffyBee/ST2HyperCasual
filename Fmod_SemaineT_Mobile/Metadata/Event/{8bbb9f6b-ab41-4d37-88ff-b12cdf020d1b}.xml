@@ -91,6 +91,8 @@
 			<destination>{87672749-5bd2-4f43-8da8-58ec8aba060d}</destination>
 			<destination>{55b191b1-6755-41d2-98ad-c287c621f0b2}</destination>
 			<destination>{548d3a55-2e69-4d2e-930d-1ce2259b7211}</destination>
+			<destination>{a81f9a4e-f277-4c1b-bd8b-4a4067edc75b}</destination>
+			<destination>{03711df8-57b6-4d91-b3da-9aa52e177a99}</destination>
 		</relationship>
 	</object>
 	<object class="ParameterProxy" id="{5d2a1583-b1f4-4c3e-adaf-b9b37c6cf575}">
@@ -261,6 +263,28 @@
 		</relationship>
 		<relationship name="triggerConditions">
 			<destination>{1a9c5bf5-9ec9-4925-a08b-dbb35e85cff8}</destination>
+		</relationship>
+	</object>
+	<object class="SustainPoint" id="{a81f9a4e-f277-4c1b-bd8b-4a4067edc75b}">
+		<property name="position">
+			<value>5.232312925170068</value>
+		</property>
+		<relationship name="timeline">
+			<destination>{b38a3f13-62b4-4c9c-a8ab-bfcfd9d89e1c}</destination>
+		</relationship>
+		<relationship name="markerTrack">
+			<destination>{f0e66978-8347-4e2a-af25-24c52c50dd63}</destination>
+		</relationship>
+	</object>
+	<object class="SustainPoint" id="{03711df8-57b6-4d91-b3da-9aa52e177a99}">
+		<property name="position">
+			<value>11.732312925170067</value>
+		</property>
+		<relationship name="timeline">
+			<destination>{b38a3f13-62b4-4c9c-a8ab-bfcfd9d89e1c}</destination>
+		</relationship>
+		<relationship name="markerTrack">
+			<destination>{f0e66978-8347-4e2a-af25-24c52c50dd63}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{fcf26c8f-a74b-4829-92d6-cc5d994d14bd}">
