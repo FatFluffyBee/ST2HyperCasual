@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (!musicIntense)
+            if (Input.touchCount > 0)
             if (Input.GetTouch(0).phase == TouchPhase.Ended)
             {
                 music.setParameterByName("Start", 1);
@@ -119,6 +120,7 @@ public class GameManager : MonoBehaviour
         screenHighScore.SetActive(true);
         screenHighScore.transform.GetChild(0).GetComponent<Text>().text = currentScore.ToString() + "m";
         highScoreCount = currentScore;
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UI/UI_ScoreHigh/UI_ScoreHigh");
     }
 
     public void SetScreenGameOver()
