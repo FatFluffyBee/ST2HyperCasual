@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
         instance = this;  
     }   
 
-    public GameObject playerBall, fragmentedPlayerBall, screenHighScore, screenGameOver, levelDisplay;
+    public GameObject playerBall, fragmentedPlayerBall, screenHighScore, screenGameOver, levelDisplay, prefabConso, prefabBreakable;
     public List<Transform> startPoint = new List<Transform>();
     public List<Transform> endPosition = new List<Transform>();
     public HealthBar progressionBar;
@@ -26,6 +26,10 @@ public class GameManager : MonoBehaviour
     public float highScoreCount, currentScore;
     public float collectibleCount = 0;
     public bool musicIntense = false;
+
+
+    private List<Vector3> transConso = new List<Vector3>();
+    private List<Vector3> transBreakable = new List<Vector3>();
 
     FMOD.Studio.EventInstance music;
 
@@ -38,6 +42,7 @@ public class GameManager : MonoBehaviour
 
         music = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Music");
         music.start();
+        StoreCoordinates();
     }
 
     // Update is called once per frame
@@ -95,6 +100,8 @@ public class GameManager : MonoBehaviour
 
             SetScreenGameOver();
             FMODUnity.RuntimeManager.PlayOneShot("event:/Ball/Bl_Death/Bl_Death");
+
+            ResetLevel();
         }
     }
 
@@ -153,9 +160,54 @@ public class GameManager : MonoBehaviour
     {
         if (playerCurrentBall != null)
         {
-            Debug.Log("Yes");
             float progression = (playerCurrentBall.transform.position.z - startPoint[currentLevel].position.z) / (endPosition[currentLevel].position.z - startPoint[currentLevel].position.z);
             progressionBar.SetHealth(progression);
         }
+    }
+
+    public void StoreCoordinates()
+    {
+        GameObject[] consos = GameObject.FindGameObjectsWithTag("Conso");
+        GameObject[] breaks = GameObject.FindGameObjectsWithTag("Breakable");
+
+        foreach(GameObject e in consos)
+        {
+            transConso.Add(e.transform.position);
+        }
+
+        foreach(GameObject e in breaks)
+        {
+            transBreakable.Add(e.transform.position);
+        }
+    }
+
+    public void ResetLevel()
+    {
+        GameObject[] consos = GameObject.FindGameObjectsWithTag("Conso");
+        GameObject[] breaks = GameObject.FindGameObjectsWithTag("Breakable");
+
+        foreach (GameObject e in consos)
+        {
+            if (e != null)
+                Destroy(e.gameObject);
+        }
+        foreach (GameObject e in breaks)
+        {
+            if (e != null)
+                Destroy(e.gameObject);
+        }
+
+        foreach(Vector3 e in transConso)
+        {
+            Debug.Log("Conso");
+            Instantiate(prefabConso, e, Quaternion.identity);
+        }
+
+        foreach(Vector3 e in transBreakable)
+        {
+            Debug.Log("Break");
+            Instantiate(prefabBreakable, e, Quaternion.identity);
+        }
+
     }
 }
