@@ -8,49 +8,56 @@ public class CameraBehavior : MonoBehaviour
     public float authorizedGap = 2f, timeToReachMyBall = 0.5f, waitingTimeDeath = 1f;
     public bool toggleOldCam = false;
 
-    public bool recentering = false;
+    public bool recentering = false, switchLevel = false;
 
-    private float zInitialPos, waitingTimeDeathCount;
+    private float waitingTimeDeathCount;
 
     private void Start()
     {
-        zInitialPos = transform.position.z;
+        Vector3 newPos = new Vector3(GameManager.instance.startPoint[GameManager.instance.currentLevel].position.x, transform.position.y, GameManager.instance.startPoint[GameManager.instance.currentLevel].position.z);
+        transform.position = newPos;
     }
 
     void LateUpdate()
     {
         if (ballPlayer == null)
-            ballPlayer = GameObject.FindGameObjectWithTag("Player").transform;
+                ballPlayer = GameObject.FindGameObjectWithTag("Player").transform;
 
         float distance = transform.position.z - ballPlayer.position.z;
 
         if (distance < 1) recentering = false;
-
-        if (!recentering)
-        {
-            waitingTimeDeathCount = 0;
-            if (toggleOldCam)
+        if (!switchLevel)
+            if (!recentering)
             {
-                if (distance < -authorizedGap || distance > authorizedGap)
+                waitingTimeDeathCount = 0;
+                if (toggleOldCam)
                 {
-                    float zMovement = Mathf.Lerp(transform.position.z, ballPlayer.position.z, (1 / timeToReachMyBall) * Time.deltaTime * 1 / Time.timeScale);
+                    if (distance < -authorizedGap || distance > authorizedGap)
+                    {
+                        float zMovement = Mathf.Lerp(transform.position.z, ballPlayer.position.z, (1 / timeToReachMyBall) * Time.deltaTime * 1 / Time.timeScale);
 
-                    transform.position = new Vector3(transform.position.x, transform.position.y, zMovement);
+                        transform.position = new Vector3(transform.position.x, transform.position.y, zMovement);
+                    }
+                }
+                else
+                {
+                    if (distance < 0)
+                    {
+                        float zMovement = Mathf.Lerp(transform.position.z, ballPlayer.position.z, (1 / timeToReachMyBall) * Time.deltaTime * 1 / Time.timeScale);
+
+                        transform.position = new Vector3(transform.position.x, transform.position.y, zMovement);
+                    }
                 }
             }
             else
             {
-                if (distance < 0)
-                {
-                    float zMovement = Mathf.Lerp(transform.position.z, ballPlayer.position.z, (1 / timeToReachMyBall) * Time.deltaTime * 1 / Time.timeScale);
-
-                    transform.position = new Vector3(transform.position.x, transform.position.y, zMovement);
-                }
+                RecenterCamera();
             }
-        }
         else
         {
-            RecenterCamera();
+            if (waitingTimeDeathCount > waitingTimeDeath)
+                SwitchLevel();
+            waitingTimeDeathCount += Time.deltaTime * 1 / Time.timeScale;
         }
     }
 
@@ -58,10 +65,19 @@ public class CameraBehavior : MonoBehaviour
     {
         if (waitingTimeDeathCount > waitingTimeDeath)
         {
-            float zMovement = Mathf.Lerp(transform.position.z, zInitialPos, (1 / timeToReachMyBall * 2) * Time.deltaTime * 1 / Time.timeScale);
+            float zMovement = Mathf.Lerp(transform.position.z, GameManager.instance.startPoint[GameManager.instance.currentLevel].position.z, (1 / timeToReachMyBall * 2) * Time.deltaTime * 1 / Time.timeScale);
 
             transform.position = new Vector3(transform.position.x, transform.position.y, zMovement);
         }
         waitingTimeDeathCount += Time.deltaTime * 1/Time.timeScale;
+    }
+
+    public void SwitchLevel()
+    {
+        Debug.Log("Switching");
+        Vector3 newPos = new Vector3(GameManager.instance.startPoint[GameManager.instance.currentLevel].position.x, transform.position.y, GameManager.instance.startPoint[GameManager.instance.currentLevel].position.z);
+        transform.position = newPos;
+        switchLevel = false;
+        GameManager.instance.SetCurrentLevel();
     }
 }

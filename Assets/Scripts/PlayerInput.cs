@@ -46,6 +46,11 @@ public class PlayerInput : MonoBehaviour
 
     // Update is called once per frame
 
+    private void OnDestroy()
+    {
+        soundHold.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
     private void FixedUpdate()
     {
         if (timeDisableColliderCount > Time.time)

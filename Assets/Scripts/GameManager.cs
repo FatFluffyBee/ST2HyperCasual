@@ -16,8 +16,11 @@ public class GameManager : MonoBehaviour
         instance = this;  
     }   
 
-    public GameObject playerBall, fragmentedPlayerBall, screenHighScore, screenGameOver;
-    private Transform startPoint;
+    public GameObject playerBall, fragmentedPlayerBall, screenHighScore, screenGameOver, levelDisplay;
+    public List<Transform> startPoint = new List<Transform>();
+    public List<Transform> endPosition = new List<Transform>();
+    public HealthBar progressionBar;
+    public int currentLevel = 0;
     public PlayerInput playerCurrentBall;
 
     public float highScoreCount, currentScore;
@@ -30,9 +33,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startPoint = GameObject.Find("PlayerStartPoint").transform;
-
         SpawnPlayer();
+        SetCurrentLevel();
 
         music = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Music");
         music.start();
@@ -73,6 +75,7 @@ public class GameManager : MonoBehaviour
 
         }
         SetCurrentScore();
+        SetLevelProgression();
     }
 
     public void KillPlayer()
@@ -90,17 +93,14 @@ public class GameManager : MonoBehaviour
             SpawnPlayer();
             stateGame = statesGame.start;
 
-            if (currentScore > highScoreCount)
-                SetScreenHighScore();
-            else
-                SetScreenGameOver();
+            SetScreenGameOver();
             FMODUnity.RuntimeManager.PlayOneShot("event:/Ball/Bl_Death/Bl_Death");
         }
     }
 
     public void SpawnPlayer()
     {
-        GameObject instance = Instantiate(playerBall, startPoint.position, Quaternion.identity);
+        GameObject instance = Instantiate(playerBall, startPoint[currentLevel].position, Quaternion.identity);
         playerCurrentBall = instance.GetComponent<PlayerInput>();
     }
 
@@ -111,15 +111,13 @@ public class GameManager : MonoBehaviour
 
     public void SetCurrentScore()
     {
-        currentScore = Mathf.RoundToInt(playerCurrentBall.transform.position.z - startPoint.transform.position.z);
+        currentScore = Mathf.RoundToInt(playerCurrentBall.transform.position.z - startPoint[currentLevel].transform.position.z);
         if (currentScore < 0) currentScore = 0;
     }
 
     public void SetScreenHighScore()
     {
         screenHighScore.SetActive(true);
-        screenHighScore.transform.GetChild(0).GetComponent<Text>().text = currentScore.ToString() + "m";
-        highScoreCount = currentScore;
         FMODUnity.RuntimeManager.PlayOneShot("event:/UI/UI_ScoreHigh/UI_ScoreHigh");
     }
 
@@ -127,5 +125,37 @@ public class GameManager : MonoBehaviour
     {
         screenGameOver.SetActive(true);
         screenGameOver.transform.GetChild(0).GetComponent<Text>().text = currentScore.ToString() + "m";
+    }
+
+    public void EndLevel()
+    {
+        if (playerCurrentBall != null)
+            Destroy(playerCurrentBall.gameObject);
+
+        currentLevel++;
+
+        if (currentLevel > 2)
+            currentLevel = 0;
+        SpawnPlayer();
+        Camera.main.GetComponent<CameraBehavior>().switchLevel = true;
+
+        SetScreenHighScore();
+
+        stateGame = statesGame.start;
+    }
+
+    public void SetCurrentLevel()
+    {
+        levelDisplay.GetComponent<Text>().text = ("LEVEL " + (currentLevel + 1).ToString());
+    }
+
+    public void SetLevelProgression()
+    {
+        if (playerCurrentBall != null)
+        {
+            Debug.Log("Yes");
+            float progression = (playerCurrentBall.transform.position.z - startPoint[currentLevel].position.z) / (endPosition[currentLevel].position.z - startPoint[currentLevel].position.z);
+            progressionBar.SetHealth(progression);
+        }
     }
 }

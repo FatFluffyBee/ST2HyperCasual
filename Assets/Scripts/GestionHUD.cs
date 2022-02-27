@@ -17,6 +17,7 @@ public class GestionHUD : MonoBehaviour
         collectibleText.text = "0";
         currentScore.text = "0m";
         highScore.text = "YOUR BEST : 100m";
+        logo.SetActive(true);
     }
 
     // Update is called once per frame
