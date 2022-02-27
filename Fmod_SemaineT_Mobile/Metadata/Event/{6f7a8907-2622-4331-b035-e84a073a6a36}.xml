@@ -173,9 +173,36 @@
 	<object class="MixerBusEffectChain" id="{ea11017d-fa39-43a3-a612-68fabe460843}">
 		<relationship name="effects">
 			<destination>{c39cd5a4-31ac-4da8-ae49-570834f43b5b}</destination>
+			<destination>{6307e6f5-66d8-4eac-8544-246ec6b19d66}</destination>
+			<destination>{43be0822-6ed2-4251-a32b-2519100849b6}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{79138a14-f7c4-48ac-9e38-c6399217cdd1}" />
 	<object class="MixerBusFader" id="{0fb3d3b6-e98a-4536-92fc-fd726c5cc349}" />
 	<object class="MixerBusFader" id="{c39cd5a4-31ac-4da8-ae49-570834f43b5b}" />
+	<object class="MultibandEqEffect" id="{6307e6f5-66d8-4eac-8544-246ec6b19d66}">
+		<property name="filterTypeA">
+			<value>3</value>
+		</property>
+		<property name="filterTypeB">
+			<value>1</value>
+		</property>
+		<property name="frequencyA">
+			<value>2603.80005</value>
+		</property>
+		<property name="frequencyB">
+			<value>2498.10815</value>
+		</property>
+		<property name="qualityA">
+			<value>0.100000001</value>
+		</property>
+		<property name="qualityB">
+			<value>0.393034458</value>
+		</property>
+	</object>
+	<object class="PitchShifterEffect" id="{43be0822-6ed2-4251-a32b-2519100849b6}">
+		<property name="pitch">
+			<value>0.779999971</value>
+		</property>
+	</object>
 </objects>
