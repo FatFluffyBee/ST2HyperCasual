@@ -466,7 +466,7 @@ MonoBehaviour:
   sourceProjectPath: Fmod_SemaineT_Mobile/Fmod_SemaineT_Mobile.fspro
   sourceBankPath: Fmod_SemaineT_Mobile/Build
   SourceBankPathUnformatted: 
-  BankRefreshCooldown: 5
+  BankRefreshCooldown: 1
   ShowBankRefreshWindow: 1
   AutomaticEventLoading: 1
   BankLoadType: 0
