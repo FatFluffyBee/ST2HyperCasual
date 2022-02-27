@@ -81,6 +81,7 @@ public class GameManager : MonoBehaviour
         }
         SetCurrentScore();
         SetLevelProgression();
+        ChechDuplicata();
     }
 
     public void KillPlayer()
@@ -208,6 +209,19 @@ public class GameManager : MonoBehaviour
             Debug.Log("Break");
             Instantiate(prefabBreakable, e, Quaternion.identity);
         }
+    }
 
+    public void ChechDuplicata()
+    {
+        if (playerCurrentBall != null)
+        {
+            GameObject[] tmp = GameObject.FindGameObjectsWithTag("Player");
+
+            if (tmp.Length > 1)
+            {
+                Destroy(tmp[0].gameObject);
+                Debug.Log("Ouf");
+            }
+        }
     }
 }
