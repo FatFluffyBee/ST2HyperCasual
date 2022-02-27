@@ -41,7 +41,7 @@ public class CameraBehavior : MonoBehaviour
                 }
                 else
                 {
-                    if (distance < 0)
+                    if (distance < 0 && transform.position.z < GameManager.instance.endPosition[GameManager.instance.currentLevel].position.z)
                     {
                         float zMovement = Mathf.Lerp(transform.position.z, ballPlayer.position.z, (1 / timeToReachMyBall) * Time.deltaTime * 1 / Time.timeScale);
 
