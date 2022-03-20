@@ -37,20 +37,20 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         SpawnPlayer();
         SetCurrentLevel();
+        StoreCoordinates();
 
         music = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Music");
         music.start();
-        StoreCoordinates();
     }
 
     // Update is called once per frame
     void Update()
     {
         if (!musicIntense)
-            if (Input.touchCount > 0)
-            if (Input.GetTouch(0).phase == TouchPhase.Ended)
+            if (Input.GetMouseButtonUp(0))
             {
                 music.setParameterByName("Start", 1);
                 musicIntense = true;
@@ -62,8 +62,7 @@ public class GameManager : MonoBehaviour
         switch(stateGame)
         {
             case statesGame.start:
-                if (Input.touchCount > 0)
-                    if (Input.GetTouch(0).phase == TouchPhase.Began) stateGame = statesGame.tuto;
+                    if (Input.GetMouseButtonDown(0)) stateGame = statesGame.tuto;
                 break;
 
             case statesGame.tuto:
@@ -86,6 +85,8 @@ public class GameManager : MonoBehaviour
 
     public void KillPlayer()
     {
+        ResetLevel();
+
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
@@ -102,7 +103,6 @@ public class GameManager : MonoBehaviour
             SetScreenGameOver();
             FMODUnity.RuntimeManager.PlayOneShot("event:/Ball/Bl_Death/Bl_Death");
 
-            ResetLevel();
         }
     }
 
@@ -150,6 +150,7 @@ public class GameManager : MonoBehaviour
         SetScreenHighScore();
 
         stateGame = statesGame.start;
+        ResetLevel();
     }
 
     public void SetCurrentLevel()

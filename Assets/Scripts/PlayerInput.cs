@@ -23,6 +23,8 @@ public class PlayerInput : MonoBehaviour
 
     FMOD.Studio.EventInstance soundHold;
 
+    private bool isHolding = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +44,7 @@ public class PlayerInput : MonoBehaviour
         maxDistanceForDrag = Screen.width * maxDragScreen;
 
         soundHold = FMODUnity.RuntimeManager.CreateInstance("event:/Ball/Bl_BulletTime/Bl_BulletTime");
+
     }
 
     // Update is called once per frame
@@ -63,23 +66,25 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
-        if (Input.touchCount > 0)
-        {
-            if (Input.GetTouch(0).phase == TouchPhase.Began)
+        //if (Input.touchCount > 0)
+        //{
+            if (Input.GetMouseButtonDown(0))
             {
                 startPoint.enabled = true;
                 endPoint.enabled = true;
                 arrowRd.enabled = true;
 
-                Vector3 positionStartPoint = Input.GetTouch(0).position;
+                Vector3 positionStartPoint = Input.mousePosition;
                 startPoint.transform.position = positionStartPoint;
 
                 soundHold.start();
+
+                isHolding = true;
             }
 
-            if (Input.GetTouch(0).phase == TouchPhase.Stationary || Input.GetTouch(0).phase == TouchPhase.Moved)
+            if (isHolding)
             {
-                Vector3 tmp = Input.GetTouch(0).position;
+                Vector3 tmp = Input.mousePosition;
 
                 if (Vector3.Distance(tmp, startPoint.transform.position) > maxDistanceForDrag) {
                     endPoint.transform.position = startPoint.transform.position + (tmp - startPoint.transform.position).normalized * maxDistanceForDrag;}
@@ -104,7 +109,7 @@ public class PlayerInput : MonoBehaviour
                 DoSlowMo();
             }
 
-            if (Input.GetTouch(0).phase == TouchPhase.Ended)
+            if (Input.GetMouseButtonUp(0))
             {
                 startPoint.enabled = false;
                 endPoint.enabled = false;
@@ -128,8 +133,10 @@ public class PlayerInput : MonoBehaviour
 
                 soundHold.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 FMODUnity.RuntimeManager.PlayOneShot("event:/Ball/Bl_Release/Bl_Release");
+
+                isHolding = false;
             }
-        }
+        //}
     }
 
     private void LateUpdate()

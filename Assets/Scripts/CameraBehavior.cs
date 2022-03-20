@@ -21,7 +21,10 @@ public class CameraBehavior : MonoBehaviour
     void LateUpdate()
     {
         if (ballPlayer == null)
+            if (GameObject.FindGameObjectWithTag("Player") != null)
                 ballPlayer = GameObject.FindGameObjectWithTag("Player").transform;
+            else
+                return;
 
         float distance = transform.position.z - ballPlayer.position.z;
 
