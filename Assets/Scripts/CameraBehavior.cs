@@ -12,6 +12,12 @@ public class CameraBehavior : MonoBehaviour
 
     private float waitingTimeDeathCount;
 
+    public void Awake()
+    {
+       // Screen.SetResolution(100, 1080, false);
+    }
+
+
     private void Start()
     {
         Vector3 newPos = new Vector3(GameManager.instance.startPoint[GameManager.instance.currentLevel].position.x, transform.position.y, GameManager.instance.startPoint[GameManager.instance.currentLevel].position.z);

@@ -29,7 +29,6 @@ public class PlayerInput : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Screen.SetResolution(1080, 2400, true);
         rB = GetComponent<Rigidbody>();
 
         startPoint = GameObject.Find("StartPoint").GetComponent<Image>();
