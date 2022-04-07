@@ -65,9 +65,9 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
-        //if (Input.touchCount > 0)
-        //{
-            if (Input.GetMouseButtonDown(0))
+        if (Input.touchCount > 0)
+        {
+            if (Input.GetTouch(0).phase == TouchPhase.Began)
             {
                 startPoint.enabled = true;
                 endPoint.enabled = true;
@@ -81,7 +81,7 @@ public class PlayerInput : MonoBehaviour
                 isHolding = true;
             }
 
-            if (isHolding)
+            if (Input.GetTouch(0).phase == TouchPhase.Moved)
             {
                 Vector3 tmp = Input.mousePosition;
 
@@ -108,7 +108,7 @@ public class PlayerInput : MonoBehaviour
                 DoSlowMo();
             }
 
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetTouch(0).phase == TouchPhase.Ended)
             {
                 startPoint.enabled = false;
                 endPoint.enabled = false;
@@ -135,7 +135,7 @@ public class PlayerInput : MonoBehaviour
 
                 isHolding = false;
             }
-        //}
+        }
     }
 
     private void LateUpdate()
